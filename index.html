@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissor JS Game</title>
+</head>
+<body>
+    <script>
+        function getComputerChoice(){
+            let rock="rock";
+            let paper="paper";
+            let scissor="scissor";
+            let getRandomValue= Math.random();
+            if (getRandomValue <=0.33){
+                
+                return rock;
+                
+            }
+            else if (getRandomValue<=0.66){
+                
+                return paper;
+                }
+            else {
+                
+                return scissor;
+                
+            }
+        }
+        
+        function checkWinner(playerSelection,computerSelection){
+            if (playerSelection==computerSelection){
+                return "tie";
+            }
+
+            else if (playerSelection=="rock" && computerSelection=="scissor"  || playerSelection=="scissor" && computerSelection=="paper" || playerSelection=="paper" && computerSelection=="rock"){
+                return "Player";
+            }
+            else{
+                return "Computer";
+            }
+         }
+
+        
+
+        function playRound(playerSelection,computerSelection){
+            const result=checkWinner(playerSelection,computerSelection);
+            if (result=="Tie"){
+                return "It's a tie";
+            }
+            else if(result=="Player"){
+                return `You won! ${playerSelection} beats ${computerSelection}`
+            }
+            else{
+                return `You Lose! ${computerSelection} beats ${playerSelection}`
+            }
+        }
+        
+
+
+        <!--taking input from user-->
+        function getPlayerChoice(){
+            let validatedInput=false;
+            while (validatedInput==false){
+            const choice=prompt("It's a 5 Round Game !! Select from ROCK PAPER SCISSOR!!")
+            if (choice==null){
+                continue;
+            }
+            const choiceInLower=choice.toLowerCase();
+            if (choiceInLower=="rock" || choiceInLower=="paper" || choiceInLower=="scissor")
+               {validatedInput=true;
+               return choiceInLower;}  }
+        }
+        function game(){
+            let playerScore=0;
+            let computerScore=0;
+            console.log("welcome")
+            for(let i=0;i<5;i++){
+                
+                const playerSelection=getPlayerChoice() ;
+                const computerSelection=getComputerChoice();
+                console.log (playRound(playerSelection,computerSelection))
+
+                console.log("----------------")
+                if (checkWinner(playerSelection,computerSelection)=="Player"){
+                    playerScore++;
+                }
+                else if(checkWinner(playerSelection,computerSelection)=="Computer"){
+                    computerScore++;
+                }
+            }
+            
+            console.log("Game Over!")
+
+            if(playerScore>computerScore){
+               console.log("YOU WON THE GAME") 
+            }else if (playerScore>computerScore){
+               console.log("Computer won the game")
+            }
+            else{
+                console.log("We have a tie")
+            }
+         }
+
+         game()
+    </script>
+    
+</body>
+</html>
